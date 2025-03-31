@@ -1,5 +1,5 @@
+import { Link } from "react-router-dom";
 import "../index.css";
-import "../app.css";
 
 export interface Car {
     id: number;
@@ -18,16 +18,35 @@ export interface Car {
 
 export default function CarCard({ car }: { car: Car }) {
     const imageFinalUrl = "http://localhost:3000" + car.imageUrl;
+
     return (
-        <div className="bg-white shadow-md rounded-md p-2 flex flex-col items-center">
-            <img
-                src={imageFinalUrl}
-                alt={car.vehicle}
-                className="w-24 h-24 object-cover rounded-md"
-            />
-            <h2 className="text-md font-semibold mt-2 text-center">{car.vehicle}</h2>
-            <p className="text-sm text-gray-500 text-center">{car.manufacturer} - {car.yearMade}</p>
-            <p className="text-sm text-gray-800 font-bold mt-1">${car.price.toLocaleString()}</p>
+        <div className="bg-gray-100 shadow-md rounded-lg overflow-hidden flex flex-col hover:shadow-lg transition-shadow duration-300">
+            {/* Image Section */}
+            <div className="w-full h-48 bg-gray-200">
+                <img
+                    src={imageFinalUrl}
+                    alt={car.vehicle}
+                    className="w-full h-full object-cover"
+                />
+            </div>
+
+            {/* Content Section */}
+            <div className="p-4 flex flex-col justify-between flex-grow">
+                <Link
+                    to={`/car/${car.id}`}
+                    className="text-xl font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-300"
+                >
+                    {car.vehicle}
+                </Link>
+                <p className="text-sm text-gray-500 mt-1">{car.manufacturer} - {car.yearMade}</p>
+                <p className="text-sm text-gray-600 mt-2">{car.description}</p>
+
+                <div className="mt-4">
+                    <p className="text-lg font-bold text-blue-600">
+                        ${car.price.toLocaleString()}
+                    </p>
+                </div>
+            </div>
         </div>
     );
 }
