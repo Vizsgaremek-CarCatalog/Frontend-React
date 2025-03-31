@@ -1,5 +1,6 @@
+import "../index.css";
 
-export interface CarType{
+export interface Car{
     id: number, 
     vehicle: string,
     type: string,
@@ -14,11 +15,16 @@ export interface CarType{
     horsePower: number
 }
 
-export default function Car({ car }: { car: CarType }) {
+
+export default function CarCard({ car }: { car: Car }) {
+    const imageFinalUrl = "http://localhost:3000" + car.imageUrl;
+
     return (
-        <div>
-            <h2>{car.id}</h2>
-            <p>{car.vehicle}</p>
+        <div className="bg-white shadow-lg rounded-lg p-4">
+          <img src={imageFinalUrl} alt={car.vehicle} className="w-full h-40 object-cover rounded-md" />
+          <h2 className="text-lg font-bold mt-2">{car.vehicle}</h2>
+          <p className="text-gray-600">{car.manufacturer} - {car.yearMade}</p>
+          <p className="text-gray-800 font-semibold">${car.price.toLocaleString()}</p>
         </div>
     );
 }

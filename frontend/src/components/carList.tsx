@@ -1,51 +1,51 @@
-import {useEffect, userEffect, useState} from "react"
-import { CarType } from "./car"
-import Car from "./car";
-import { CarType } from "./car";
+import { useEffect, useState } from "react";
+import CarCard from "./Car";
+import { Car } from "./Car";
+import { useNavigate } from "react-router-dom";
+import RoutingService from "../services/RoutingService";
+import "../index.css";
 
-
-
-export default function CarList(){
-
-    const [cars, setCars] = useState<Car[]>([])
-    const [error, setError] = useState(null);
-    const [errorServer, setErrorServer] = useState("");
+export default function CarList() {
+    const [cars, setCars] = useState<Car[]>([]);
+    const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
-
+    const BACKEND_URL = "http://localhost:3000/carcatalog";
+    const navigate = useNavigate();
 
     const fetchCars = () => {
-        setLoading(true)
-        setError(null)
-        fetch("http://localhost:3000/cars")
-        .then((response) => {
-            if(!response.ok){
-                throw new Error(`Server responded with a status ${response.status}`);
-            }
-            return response.json();
-        })
-        .then((data) => {
-            setCars(data)
-            setLoading(false)
-        })
-        .catch((error) => {
-            setError(error.message)
-            setLoading(false)
-        });
+        setLoading(true);
+        setError(null);
+        fetch(`${BACKEND_URL}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Server responded with status ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setCars(data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                setError(error.message);
+                setLoading(false);
+                RoutingService.navigateToError(navigate);
+            });
     };
 
-
     useEffect(() => {
-        fetchCars()
-    }, [])
+        fetchCars();
+    }, []);
 
     return (
-        <> 
         <div>
-            {cars.map((car, index) => (
-                 <Car car={car}></Car>
-            ))}
+            {loading && <p>Loading cars...</p>}
+            {error && <p className="text-red-500">Error: {error}</p>}
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+                {cars.map((car) => (
+                    <CarCard key={car.id} car={car} />
+                ))}
+            </div>
         </div>
-        </>
-    )
-
+    );
 }

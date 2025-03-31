@@ -1,13 +1,19 @@
 import './App.css'
-import CarList from './components/carList'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import CarList from "./components/CarList";
+import ErrorPage from "./components/ErrorPage";
+import Home from "./components/Home";
 
 function App() {
-  return (
-    <>
-      <CarList></CarList>
-
-    </>
-  )
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/cars" element={<CarList />} />
+                <Route path="/error" element={<ErrorPage />} />
+            </Routes>
+        </Router>
+    );
 }
 
-export default App
+export default App;
