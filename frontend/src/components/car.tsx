@@ -22,7 +22,7 @@ export default function CarCard({ car }: { car: Car }) {
     return (
         <div className="bg-gray-100 shadow-md rounded-lg overflow-hidden flex flex-col hover:shadow-lg transition-shadow duration-300">
             {/* Image Section */}
-            <div className="w-full h-48 bg-gray-200">
+            <div className="aspect-w-16 aspect-h-9">
                 <img
                     src={imageFinalUrl}
                     alt={car.vehicle}
