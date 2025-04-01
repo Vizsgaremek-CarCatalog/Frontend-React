@@ -5,7 +5,8 @@ import ErrorPage from "./components/ErrorPage";
 import Navbar from './components/Navbar';
 import Home from "./components/Home";
 import CarPage from "./components/CarPage";
-import PageTransition from "./components/PageTransition";
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
 
 function App() {
     return (
@@ -16,6 +17,8 @@ function App() {
                 <Route path="/cars" element={<CarList />} />
                 <Route path="/car/:id" element={<CarPage />} />
                 <Route path="/error" element={<ErrorPage />} />
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/signup" element={<SignUp />} />
             </Routes>
             
         </Router>

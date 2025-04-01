@@ -34,18 +34,18 @@ export default function CarPage() {
     }, [id]);
 
     if (error) {
-        return <p className="text-red-500">{error}</p>;
+        return <p className="text-red-500 text-center mt-8">{error}</p>;
     }
 
     if (!car) {
-        return <p>Loading...</p>;
+        return <p className="text-center mt-8">Loading...</p>;
     }
 
     return (
-        <div className="p-6">
-            <div className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col lg:flex-row">
+        <div className="p-6 bg-gray-100 min-h-screen">
+            <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
                 {/* Car Image */}
-                <div className="w-full lg:w-1/3 p-4">
+                <div className="w-full lg:w-1/2 p-4">
                     <img
                         src={`http://localhost:3000${car.imageUrl}`}
                         alt={car.vehicle}
@@ -54,47 +54,45 @@ export default function CarPage() {
                 </div>
 
                 {/* Car Details */}
-                <div className="w-full lg:w-2/3 p-6">
-                    <h1 className="text-3xl font-bold text-gray-800 mb-4">{car.vehicle}</h1>
-                    <p className="text-gray-600 mb-6">{car.description}</p>
+                <div className="p-6">
+                    <h1 className="text-4xl font-bold text-gray-800 mb-4">{car.manufacturer} - {car.vehicle}</h1>
+                    <p className="text-gray-600 mb-8">{car.description}</p>
 
                     {/* Table-like layout for additional details */}
-                    <table className="table-auto w-full text-left border-collapse">
-                        <tbody>
-                            <tr className="border-b">
-                                <th className="py-2 px-4 font-medium text-gray-700 bg-gray-100">Type</th>
-                                <td className="py-2 px-4">{car.type}</td>
-                            </tr>
-                            <tr className="border-b">
-                                <th className="py-2 px-4 font-medium text-gray-700 bg-gray-100">Color</th>
-                                <td className="py-2 px-4">{car.color}</td>
-                            </tr>
-                            <tr className="border-b">
-                                <th className="py-2 px-4 font-medium text-gray-700 bg-gray-100">Fuel</th>
-                                <td className="py-2 px-4">{car.fuel}</td>
-                            </tr>
-                            <tr className="border-b">
-                                <th className="py-2 px-4 font-medium text-gray-700 bg-gray-100">Manufacturer</th>
-                                <td className="py-2 px-4">{car.manufacturer}</td>
-                            </tr>
-                            <tr className="border-b">
-                                <th className="py-2 px-4 font-medium text-gray-700 bg-gray-100">Mass</th>
-                                <td className="py-2 px-4">{car.mass} kg</td>
-                            </tr>
-                            <tr className="border-b">
-                                <th className="py-2 px-4 font-medium text-gray-700 bg-gray-100">Horsepower</th>
-                                <td className="py-2 px-4">{car.horsePower} HP</td>
-                            </tr>
-                            <tr className="border-b">
-                                <th className="py-2 px-4 font-medium text-gray-700 bg-gray-100">Year Made</th>
-                                <td className="py-2 px-4">{car.yearMade}</td>
-                            </tr>
-                            <tr>
-                                <th className="py-2 px-4 font-medium text-gray-700 bg-gray-100">Price</th>
-                                <td className="py-2 px-4">${car.price.toLocaleString()}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="bg-gray-100 p-4 rounded-lg shadow">
+                            <h3 className="text-lg font-semibold text-gray-700">Type</h3>
+                            <p className="text-gray-600">{car.type}</p>
+                        </div>
+                        <div className="bg-gray-100 p-4 rounded-lg shadow">
+                            <h3 className="text-lg font-semibold text-gray-700">Color</h3>
+                            <p className="text-gray-600">{car.color}</p>
+                        </div>
+                        <div className="bg-gray-100 p-4 rounded-lg shadow">
+                            <h3 className="text-lg font-semibold text-gray-700">Fuel</h3>
+                            <p className="text-gray-600">{car.fuel}</p>
+                        </div>
+                        <div className="bg-gray-100 p-4 rounded-lg shadow">
+                            <h3 className="text-lg font-semibold text-gray-700">Manufacturer</h3>
+                            <p className="text-gray-600">{car.manufacturer}</p>
+                        </div>
+                        <div className="bg-gray-100 p-4 rounded-lg shadow">
+                            <h3 className="text-lg font-semibold text-gray-700">Mass</h3>
+                            <p className="text-gray-600">{car.mass} kg</p>
+                        </div>
+                        <div className="bg-gray-100 p-4 rounded-lg shadow">
+                            <h3 className="text-lg font-semibold text-gray-700">Horsepower</h3>
+                            <p className="text-gray-600">{car.horsePower} HP</p>
+                        </div>
+                        <div className="bg-gray-100 p-4 rounded-lg shadow">
+                            <h3 className="text-lg font-semibold text-gray-700">Year Made</h3>
+                            <p className="text-gray-600">{car.yearMade}</p>
+                        </div>
+                        <div className="bg-gray-100 p-4 rounded-lg shadow">
+                            <h3 className="text-lg font-semibold text-gray-700">Price</h3>
+                            <p className="text-gray-600">${car.price.toLocaleString()}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
